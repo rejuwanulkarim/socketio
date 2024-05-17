@@ -5,6 +5,7 @@ const app = express()
 
 const cors = require('cors');
 let message = ''
+app.use(cors())
 const server = http.createServer(app)
 const io = require('socket.io')(server)
 
