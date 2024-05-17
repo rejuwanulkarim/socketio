@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Let's Draw</title>
+        <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #drawCan {
+            width: 500px;
+            height: 500px;
+            /* background-color: black; */
+            border: 2px solid red;
+            margin: auto;
+        }
+    </style>
+    <!-- <canvas id="drawCan">
+
+    </canvas> -->
+
+    <script>
+
+        let x = 0
+        let y = 0
+        let Sx = 0
+        let Sy = 0
+        let draw = false;
+        const canvasSel = document.getElementById("drawCan")
+        const canvasCtx = canvasSel.getContext("2d")
+        canvasSel.addEventListener("mousedown", (e) => {
+            x = e.clientX
+            y = e.clientY
+            draw = true
+
+            canvasCtx.beginPath();
+        })
+        canvasSel.addEventListener("mouseup", (e) => {
+            canvasCtx.closePath();
+        })
+
+
+
+
+        const drawCanvas = (x, y, x2, y2) => {
+            console.log("mhsdf", x2, y2)
+            canvasCtx.strokeStyle = "red";
+            canvasCtx.lineWidth = 1;
+            canvasCtx.moveTo(x-120, y-120);
+            canvasCtx.lineTo(x2-120, y2-120);
+            canvasCtx.stroke();
+            canvasCtx.closePath()
+        }
+        canvasSel.addEventListener("mousemove", (e) => {
+            if (draw) {
+
+                drawCanvas(x, y, e.clientX, e.clientY)
+                x = e.offsetX
+                y = e.offsetY
+            }
+
+        })
+    </script>
+
+<script>
+    const socket=io("http://192.168.0.125:443");
+
+
+</script>
+
+</body>
+
+</html>
